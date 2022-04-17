@@ -24,7 +24,6 @@
 {:else}
   <button 
     on:click
-
     class="btn flex items-center justify-center"
     class:btn-primary={primary}
     class:btn-outline={outline}

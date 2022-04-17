@@ -53,10 +53,10 @@
 
 @layer components {
   .btn {
-    @apply py-1 px-2 rounded bg-gray-50 border;
+    @apply py-1 px-2 rounded bg-gray-50;
   }
   .btn-primary {
-    @apply bg-black text-white font-semibold;
+    @apply bg-black text-white font-semibold px-4;
   }
   .btn-outline {
     @apply bg-gray-50 text-gray-700 font-semibold border-2 border-gray-800;

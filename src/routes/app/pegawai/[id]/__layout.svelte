@@ -23,19 +23,25 @@
 
   export let pegawai;
   setContext('pegawai', pegawai)
+
+  const menus = [
+    { label: 'jadwal', path: `/app/pegawai/${pegawai.id}/jadwal` },
+    { label: 'edit data', path: `/app/pegawai/${pegawai.id}/edit-data` },
+    { label: 'hapus', path: `/app/pegawai/${pegawai.id}/hapus` }
+  ]
 </script>
 
 <section class='section border-b border-gray-200'>
-
   <div class="container grid grid-cols-12 gap-y-4 px-4 py-6 md:px-none md:gap-x-8">
 
     <div class="col-span-12 md:col-span-2 flex flex-col justify-center items-center md:justify-center gap-y-2">
       <img
         src={pegawai.avatar}
-        class="rounded-full"
+        class="rounded-full h-32"
         alt="Gambar"
       />
     </div>
+
     <div class="col-span-12 md:col-span-4 flex flex-col items-center md:items-start justify-center text-gray-500">
       <div class="font-black text-2xl md:text-3xl text-black">{pegawai.nama}</div>
       <div class="font-semibold">{pegawai.unitKerja.nama}</div>
@@ -45,26 +51,16 @@
     </div>  
 
     <div class="col-span-12 md:col-span-6 flex items-center justify-center gap-x-4 whitespace-nowrap">
-      <FButton
-        outline
-        size="sm"
-      >
-        Jadwal
-      </FButton>
-      <FButton
-        outline
-        size="sm"
-      >
-        Edit Data
-      </FButton>
-      <FButton
-        outline
-        size="sm"
-      >
-        Hapus Pegawai
-      </FButton>
+      {#each menus as menu}
+        <FButton
+          outline
+          size="lg"
+          path={menu.path}
+        >
+          {menu.label}
+        </FButton>
+      {/each}
     </div>
-
   </div>
 </section>
 
