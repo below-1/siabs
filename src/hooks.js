@@ -29,17 +29,20 @@ export const handle = async ({ event, resolve }) => {
 	}
 
 	if (cookies) {
-		let user = {}
-		if (cookies.username) {
-			user.username = cookies.username
+		let curr_sess = {}
+		if (cookies.token) {
+			const login = await db.login.findFirst({
+				where: {
+					token: cookies.token
+				},
+				include: {
+					user: true
+				}
+			})
+			if (login) {
+				event.locals.authSession = login
+			}
 		}
-		if (cookies.superadmin) {
-			user.isSuperAdmin = true
-		}
-		if (cookies.admin_unit_kerja) {
-			user.isAdminUnitKerja = true
-		}
-		event.locals.user = user;
 	}
 
 	

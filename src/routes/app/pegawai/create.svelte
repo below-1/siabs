@@ -85,13 +85,6 @@
         <Field label="Password">
           <Finput name="password" bind:value={password} error={verr.fields.password} />
         </Field>
-        <Field label="Pilih Unit Kerja">
-          <FSelect 
-            name="unitKerjaId" 
-            bind:value={unitKerjaId} 
-            options={unitKerjaOptions}
-          />
-        </Field>
         <FButton 
           primary={true} 
           disabled={!verr.valid}

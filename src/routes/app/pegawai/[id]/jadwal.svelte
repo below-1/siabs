@@ -25,6 +25,14 @@
         <div>
           Data Jadwal Masih Kosong
         </div>
+      {:else}
+        <ul>
+          {#each items as item}
+            <li>
+              <div>{item.hari}, {item.waktu}</div>
+            </li>
+          {/each}
+        </ul>
       {/if}
     </div>
 

@@ -10,18 +10,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum StatusKerja {
+enum WorkStatus {
   WorkFromHome
   WorkFromOffice
   DinasLuar
 }
+
+enum JadwalType {
+  Masuk
+  Keluar
+}
+
 
 model Login {
   id              Int            @id @default(autoincrement())
   createdAt       DateTime       @default(now())
   expiredAt DateTime
   token String
-
   user User @relation(fields: [userId], references: [id])
   userId Int
 }
@@ -30,11 +35,13 @@ model User {
   id              Int            @id @default(autoincrement())
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
-  username        String
-  password        String
-  isSuperAdmin  Boolean @default(false)
+  username String
+  password String
+  superUser Boolean
+  supervisedUnitKerjas UnitKerja[] 
   pegawai         Pegawai?
-  loginList Login[]
+  logins Login[]
+  createdJadwals Jadwal[] @relation("CreatedJadwal")
 }
 
 model Pegawai {
@@ -45,13 +52,9 @@ model Pegawai {
   nip             String?
   nik             String
   avatar          String?
-  isAdminUnitKerja Boolean  @default(false)
   user  User @relation(fields: [userId], references: [id])
   userId Int
-  unitKerja       UnitKerja @relation(fields: [unitKerjaId], references: [id])
-  unitKerjaId       Int
-  createdJadwalList Jadwal[] @relation("CreatedJadwal")
-  jadwalList Jadwal[] @relation("JadwalPegawai")
+  absens Absen[]
 }
 
 model UnitKerja {
@@ -63,8 +66,7 @@ model UnitKerja {
   avatar String?
   latitude  String?
   longitude String?
-
-  pegawaiList  Pegawai[]
+  adminList  User[]
   jadwalList Jadwal[]
 }
 
@@ -73,33 +75,23 @@ model Jadwal {
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
 
-  createdBy Pegawai @relation("CreatedJadwal", fields: [createdById], references: [id])
+  createdBy User @relation("CreatedJadwal", fields: [createdById], references: [id])
   createdById Int 
-
-  pegawai Pegawai @relation("JadwalPegawai", fields: [pegawaiId], references: [id])
-  pegawaiId Int
 
   unitKerja UnitKerja @relation(fields: [unitKerjaId], references: [id])
   unitKerjaId Int
 
-  absen Absen?
-
-  waktu  DateTime @db.Date()
-  jam  DateTime @db.Time()
-  status StatusKerja
-  closed  Boolean @default(false)
+  hari  DateTime @db.Date()
+  waktu  DateTime @db.Time()
+  type JadwalType
 }
 
 model Absen {
   id              Int            @id @default(autoincrement())
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
-
-  jadwal Jadwal @relation(fields: [jadwalId], references: [id])
-  jadwalId Int
-  
-  waktu  DateTime @db.Date()
-  jam  DateTime @db.Time()
-  latitude String
-  longitude String
+  pegawai Pegawai @relation(fields: [pegawaiId], references: [id])
+  pegawaiId Int
+  workStatus WorkStatus
+  waktu DateTime?
 }

@@ -69,7 +69,6 @@
         </Field>
         <FButton 
           primary={true} 
-          loading={loading}
           disabled={!verr.valid}
           size="lg"
         >

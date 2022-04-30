@@ -25,6 +25,7 @@
   setContext('pegawai', pegawai)
 
   const menus = [
+    { label: 'overview', path: `/app/pegawai/${pegawai.id}/overview`, icon: '<ion-icon name="apps-outline"></ion-icon>' },
     { label: 'jadwal', path: `/app/pegawai/${pegawai.id}/jadwal` },
     { label: 'edit data', path: `/app/pegawai/${pegawai.id}/edit-data` },
     { label: 'hapus', path: `/app/pegawai/${pegawai.id}/hapus` }
@@ -32,33 +33,27 @@
 </script>
 
 <section class='section border-b border-gray-200'>
-  <div class="container grid grid-cols-12 gap-y-4 px-4 py-6 md:px-none md:gap-x-8">
 
-    <div class="col-span-12 md:col-span-2 flex flex-col justify-center items-center md:justify-center gap-y-2">
-      <img
-        src={pegawai.avatar}
-        class="rounded-full h-32"
-        alt="Gambar"
-      />
-    </div>
-
+  <div class="container grid grid-cols-12 gap-y-4 px-4 py-4 md:px-none md:gap-x-2">
+    <img class="hidden md:block h-20 rounded" src="https://i.pravatar.cc/150?img=${pegawai.id}" />
     <div class="col-span-12 md:col-span-4 flex flex-col items-center md:items-start justify-center text-gray-500">
-      <div class="font-black text-2xl md:text-3xl text-black">{pegawai.nama}</div>
-      <div class="font-semibold">{pegawai.unitKerja.nama}</div>
-      <div class="font-semibold">NIP: {pegawai.nip}, NIK: {pegawai.nik}</div>
-      <div class="flex flex-wrap gap-x-4">
+      <img class="h-32 md:hidden rounded-full" src="https://i.pravatar.cc/150?img=${pegawai.id}" />
+      <div class="font-black text-lg md:text-xl text-black">{pegawai.nama}</div>
+      <div class="text-sm font-semibold">NIP: {pegawai.nip}, NIK: {pegawai.nik}</div>
+      <div class="text-sm flex flex-wrap gap-x-4">
       </div>
     </div>  
+  </div>
 
-    <div class="col-span-12 md:col-span-6 flex items-center justify-center gap-x-4 whitespace-nowrap">
+  <div class="bg-gray-50 border-b">
+    <div class="container flex items-center justify-start md:gap-x-4 whitespace-nowrap">
       {#each menus as menu}
-        <FButton
-          outline
-          size="lg"
-          path={menu.path}
+        <a 
+          href={menu.path}
+          class="text-gray-600 px-4 py-2 hover:bg-gray-50 hover:bg-gray-200 rounded flex-grow md:flex-grow-0"
         >
           {menu.label}
-        </FButton>
+        </a>
       {/each}
     </div>
   </div>

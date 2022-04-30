@@ -12,7 +12,7 @@
   <div class="container py-12 flex flex-col gap-y-4 px-4">
     <h1 class="font-black text-3xl">Daftar Pegawai</h1>
     <div class="flex flex-wrap gap-x-4">
-      {#if user.isSuperAdmin}
+      {#if user.superUser}
       <FButton 
         size="sm" 
         path="/app/pegawai/create"
@@ -35,11 +35,11 @@
         />
         <div>
           <div class="text-lg font-bold">{item.nama}</div>
-          <div class="text-sm">{item.unitKerja.nama}, {item.nik}</div>
+          <div class="text-sm">{item.nip}, {item.nik}</div>
         </div>
         <div class="flex-grow"></div>
         <a 
-          href={`/app/pegawai/${item.id}`}
+          href={`/app/pegawai/${item.id}/overview`}
           class="border border-gray-200 rounded bg-gray-50 px-2 py-1 font-semibold text-gray-500">
           detail
         </a>

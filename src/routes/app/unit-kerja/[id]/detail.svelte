@@ -87,7 +87,7 @@
 
 <section class="pb-12">
   <div class="container py-12 px-4 flex">
-    {#if user.pegawai.isAdminUnitKerja || user.isSuperAdmin}
+    {#if user.superUser}
     <div class="w-full md:w-1/2">
       <h1 class="text-2xl font-black mb-8">Edit Data Unit Kerja</h1>
       <form 

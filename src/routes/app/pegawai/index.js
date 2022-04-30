@@ -4,11 +4,7 @@ export async function get(event) {
   let response = {}
   response.status = 200
   response.body = {}
-  const items = await db.pegawai.findMany({
-    include: {
-      unitKerja: true
-    }
-  })
+  const items = await db.pegawai.findMany({})
   response.body.items = items
   return response
 }

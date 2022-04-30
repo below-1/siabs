@@ -31,7 +31,9 @@
   function _menus(sess, page) {
     const current_path_pattern = '/' + page.routeId
     let result = []
-    if (sess.user.isSuperAdmin) {
+    console.log('sess')
+    console.log(sess)
+    if (sess.user.superUser) {
       result = [
         { path: '/app/unit-kerja', label: 'unit kerja' },
         { path: '/app/pegawai', label: 'pegawai' },
@@ -68,101 +70,107 @@
   $: menus = _menus($session, $page)
 </script>
 
-<nav class="bg-black text-white">
-  <div class="container flex">
-    <div class="px-4 md:px-none flex py-3" href="/app">
-      <div class="h-8 w-8 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500">
+<div class="flex flex-col">
+  <nav class="bg-black text-white">
+    <div class="container flex">
+      <div class="px-4 md:px-none flex py-3" href="/app">
+        <div class="h-8 w-8 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500">
+        </div>
+        <div class="w-0.5 h-8 bg-gray-600 mx-4"></div>
+        <img 
+          src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" 
+          alt="logo" 
+          class="w-8 h8 mr-1 rounded-full"
+        />
+        <div>
+          <div class="font-black text-lg" style="line-height: 1;">{$session.user.username}</div>
+
+          {#if $session.user.superUser}
+          <div class="text-sm text-gray-600">Super Admin</div>
+          {:else}
+          <div class="text-sm text-gray-600">Pegawai</div>
+          {/if}
+        </div>
       </div>
-      <div class="w-0.5 h-8 bg-gray-600 mx-4"></div>
-      <img 
-        src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" 
-        alt="Bulma: a modern CSS framework based on Flexbox" 
-        class="w-8 h8 mr-1 rounded-full"
-      />
-      <div>
-        <div class="font-black text-lg" style="line-height: 1;">{$session.user.username}</div>
 
-        {#if $session.user.isSuperAdmin}
-        <div class="text-sm text-gray-600">Super Admin</div>
-        {:else if $session.user.pegawai.isAdminUnitKerja}
-        <div class="text-sm text-gray-600">Admin Unit Kerja</div>
-        {:else}
-        <div class="text-sm text-gray-600">Pegawai</div>
-        {/if}
+      <div class="flex-grow">
+      </div>
+
+      <div class="hidden md:flex gap-x-6 text-gray-400 font-bold text-sm">
+        <a
+          target="_blank"
+          href="/app"
+          class="gap-x-2 flex items-center px-4 py-2 hover:bg-gray-100 hover:text-gray-700"
+        >
+          <ion-icon name="notifications-outline"></ion-icon>
+          <span>
+            Pesan
+          </span>
+        </a>
+
+        <a class="gap-x-2 flex items-center" href="/app">
+          <ion-icon name="person-outline"></ion-icon>
+          <span>Account</span>
+        </a>
+      </div>
+
+      <div class="md:hidden flex items-center">
+        <ion-icon 
+          on:click={toggleMobileMenu}
+          class="w-8 h-8 px-4 text-gray-500 hover:text-gray-100 active:text-white" 
+          name="menu-outline"></ion-icon>
       </div>
     </div>
 
-    <div class="flex-grow">
-    </div>
+    {#if showMobileMenu}
+      <div class="flex flex-col text-gray-400 font-bold text-xl">
+        <a
+          target="_blank"
+          href="/app"
+          class="gap-x-2 flex items-center justify-end px-8 py-2 hover:bg-gray-100 hover:text-gray-700"
+        >
+          <ion-icon name="notifications-outline"></ion-icon>
+          <span>
+            Pesan
+          </span>
+        </a>
 
-    <div class="hidden md:flex gap-x-6 text-gray-400 font-bold text-sm">
-      <a
-        target="_blank"
-        href="/app"
-        class="gap-x-2 flex items-center px-4 py-2 hover:bg-gray-100 hover:text-gray-700"
-      >
-        <ion-icon name="notifications-outline"></ion-icon>
-        <span>
-          Pesan
-        </span>
-      </a>
+        <a
+          target="_blank"
+          href="/app"
+          class="gap-x-2 flex items-center justify-end px-8 py-2 hover:bg-gray-100 hover:text-gray-700"
+        >
+          <ion-icon name="person-outline"></ion-icon>
+          <span>
+            Akun
+          </span>
+        </a>
 
-      <a class="gap-x-2 flex items-center" href="/app">
-        <ion-icon name="person-outline"></ion-icon>
-        <span>Account</span>
-      </a>
-    </div>
+      </div>
+    {/if}
+  </nav>
 
-    <div class="md:hidden flex items-center">
-      <ion-icon 
-        on:click={toggleMobileMenu}
-        class="w-8 h-8 px-4 text-gray-500 hover:text-gray-100 active:text-white" 
-        name="menu-outline"></ion-icon>
+  <nav class="border-b border-gray-200 bg-gray-50">
+    <div class="container flex overflow-x-scroll md:overflow-hidden">
+      {#each menus as menu, i}
+        <a
+          href={menu.path}
+          class="py-3 px-4 hover:bg-gray-50 border-black whitespace-nowrap"
+          class:text-black={menu.active}
+          class:font-black={menu.active}
+          class:border-b-2={menu.active}
+        >
+          {menu.label}
+        </a>
+      {/each}
     </div>
+  </nav>
+
+  <div class="flex-grow">
+    <slot></slot>
   </div>
 
-  {#if showMobileMenu}
-    <div class="flex flex-col text-gray-400 font-bold text-xl">
-      <a
-        target="_blank"
-        href="/app"
-        class="gap-x-2 flex items-center justify-end px-8 py-2 hover:bg-gray-100 hover:text-gray-700"
-      >
-        <ion-icon name="notifications-outline"></ion-icon>
-        <span>
-          Pesan
-        </span>
-      </a>
-
-      <a
-        target="_blank"
-        href="/app"
-        class="gap-x-2 flex items-center justify-end px-8 py-2 hover:bg-gray-100 hover:text-gray-700"
-      >
-        <ion-icon name="person-outline"></ion-icon>
-        <span>
-          Akun
-        </span>
-      </a>
-
-    </div>
-  {/if}
-</nav>
-
-<nav class="border-b border-gray-200 bg-gray-50">
-  <div class="container flex overflow-x-scroll md:overflow-hidden">
-    {#each menus as menu, i}
-      <a
-        href={menu.path}
-        class="py-3 px-4 hover:bg-gray-50 border-black whitespace-nowrap"
-        class:text-black={menu.active}
-        class:font-black={menu.active}
-        class:border-b-2={menu.active}
-      >
-        {menu.label}
-      </a>
-    {/each}
-  </div>
-</nav>
-
-<slot></slot>
+  <footer class="border-t border-gray-200 flex justify-center items-center h-12 bg-gray-100">
+    <div class="text-sm font-bold text-gray-400">Copyright Jordan Meta</div>
+  </footer>
+</div>
