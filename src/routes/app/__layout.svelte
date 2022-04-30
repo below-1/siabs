@@ -31,8 +31,6 @@
   function _menus(sess, page) {
     const current_path_pattern = '/' + page.routeId
     let result = []
-    console.log('sess')
-    console.log(sess)
     if (sess.user.superUser) {
       result = [
         { path: '/app/unit-kerja', label: 'unit kerja' },

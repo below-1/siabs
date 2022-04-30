@@ -3,7 +3,9 @@
   import FButton from '$lib/fbutton.svelte'
 
   const pegawai = getContext('pegawai');
-  export let items = [];
+  export let items = [
+    
+  ];
 </script>
 
 <section class='section'>

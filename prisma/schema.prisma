@@ -16,7 +16,7 @@ enum WorkStatus {
   DinasLuar
 }
 
-enum JadwalType {
+enum AbsenType {
   Masuk
   Keluar
 }
@@ -83,7 +83,6 @@ model Jadwal {
 
   hari  DateTime @db.Date()
   waktu  DateTime @db.Time()
-  type JadwalType
 }
 
 model Absen {
@@ -94,4 +93,5 @@ model Absen {
   pegawaiId Int
   workStatus WorkStatus
   waktu DateTime?
+  type AbsenType
 }
