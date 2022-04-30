@@ -16,6 +16,11 @@ enum WorkStatus {
   DinasLuar
 }
 
+enum JadwalStatus {
+  Draft
+  Published
+}
+
 enum AbsenType {
   Masuk
   Keluar
@@ -83,6 +88,7 @@ model Jadwal {
 
   hari  DateTime @db.Date()
   waktu  DateTime @db.Time()
+  status JadwalStatus
 }
 
 model Absen {
