@@ -2,6 +2,7 @@
   export let value = '';
   export let name = '';
   export let error = null;
+  export let placeholder = '';
 </script>
 
 <input 

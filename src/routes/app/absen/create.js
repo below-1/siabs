@@ -1,17 +1,17 @@
-import { db } from '../../../../db'
+import { db } from '../../../db'
+import dayjs from 'dayjs'
 
 export async function get(event) {
+  const jadwalId = parseInt(event.url.searchParams.get('jadwal'))
   const jadwal = await db.jadwal.findFirst({
     where: {
-      id: parseInt(event.params.id)
+      id: jadwalId
     },
     include: {
-      createdBy: true,
       unitKerja: true
     }
   })
   return {
-    status: 200,
     body: {
       jadwal
     }

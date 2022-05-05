@@ -88,7 +88,8 @@ model Jadwal {
 
   hari  DateTime @db.Date()
   waktu  DateTime @db.Time()
-  status JadwalStatus
+  status JadwalStatus @default(Draft)
+  absen Absen[]
 }
 
 model Absen {
@@ -99,5 +100,7 @@ model Absen {
   pegawaiId Int
   workStatus WorkStatus
   waktu DateTime?
+  jadwal Jadwal @relation(fields: [jadwalId], references: [id])
+  jadwalId Int
   type AbsenType
 }
