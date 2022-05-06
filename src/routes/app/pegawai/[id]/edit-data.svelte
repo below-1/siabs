@@ -2,6 +2,7 @@
   import { getContext } from 'svelte'
   import Field from '$lib/field.svelte'
   import Finput from '$lib/finput.svelte'
+  import Ffile from '$lib/ffile.svelte'
   import FSelect from '$lib/fselect.svelte'
   import FButton from '$lib/fbutton.svelte'
 
@@ -30,6 +31,9 @@
     </Field>
     <Field label="NIK">
       <Finput name="nik" bind:value={payload.nik} />
+    </Field>
+    <Field label="Avatar">
+      <Ffile name="avatar" />
     </Field>
     <FButton primary>Simpan</FButton>
   </form>
