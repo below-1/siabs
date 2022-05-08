@@ -21,12 +21,9 @@ export async function get(event) {
 export async function post(event) {
   const jadwalId = parseInt(event.url.searchParams.get('jadwal'))
   const payload = await event.request.json();
-  console.log(payload)
   const absen = await db.Absen.create({
     data: {
-      type: payload.type,
       workStatus: payload.workStatus,
-
       jadwal: {
         connect: {
           id: jadwalId
