@@ -17,6 +17,7 @@ export async function post(event) {
   let jadwal_data = {
     hari: d.toDate(),
     waktu: d.toDate(),
+    type: data.get('type'),
     unitKerja: {
       connect: {
         id: parseInt(data.get('unitKerja'))

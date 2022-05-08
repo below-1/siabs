@@ -9,6 +9,7 @@
   import FTime from '$lib/ftime.svelte'
   import Finput from '$lib/finput.svelte'
   import FSelect from '$lib/fselect.svelte'
+  import AbsenTypeSelect from '$lib/absen-type-select.svelte'
 
   const cu = getContext('currentUser');
   const user = cu.getUser();
@@ -53,6 +54,11 @@
           <FSelect
             name="unitKerja"
             options={unitKerjaOptions}
+          />
+        </Field>
+        <Field label="Pilih Tipe Absen">
+          <AbsenTypeSelect
+            name="type"
           />
         </Field>
         <FButton 

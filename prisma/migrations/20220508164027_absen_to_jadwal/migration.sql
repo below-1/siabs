@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Jadwal" ALTER COLUMN "type" DROP DEFAULT;

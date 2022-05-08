@@ -6,6 +6,7 @@
   import FInput from '$lib/finput.svelte'
   import FButton from '$lib/fbutton.svelte'
   import FSelect from '$lib/fselect.svelte'
+  import WorkStatusSelect from '$lib/work-status-select.svelte'
 
   import { client_fetch_json } from '$lib/http'
   import { date } from '$lib/format/jadwal'
@@ -31,24 +32,10 @@
     pegawaiId: [
       required('pegawai harus diisi'),
     ],
-    type: [
-      required('Tipe Absen harus diisi'),
-    ],
     workStatus: [
       required('Status Kerja harus diisi'),
     ],
   }, payload);
-
-  const work_status_options = [
-    { value: 'WorkFromHome', text: 'Work From Home' },
-    { value: 'WorkFromOffice', text: 'Work From Office' },
-    { value: 'DinasLuar', text: 'Dinas Luar' }
-  ]
-
-  const absen_type_options = [
-    { value: 'Masuk', text: 'Masuk' },
-    { value: 'Keluar', text: 'Keluar' }
-  ]
 
   $: formatted = date(jadwal).formatted;
   $: ftstamp = `${formatted.hari} ${formatted.waktu}`;
@@ -162,18 +149,9 @@
       </FField>
 
       <FField label="Status">
-        <FSelect
+        <WorkStatusSelect
           name="workStatus"
-          options={work_status_options}
           bind:selected={workStatus}
-          error={verr.fields.workStatus}
-        />
-      </FField>
-      <FField label="Tipe">
-        <FSelect
-          name="type"
-          options={absen_type_options}
-          bind:selected={type}
           error={verr.fields.workStatus}
         />
       </FField>

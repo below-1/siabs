@@ -45,7 +45,12 @@
             {/if}
             <div class="flex-grow text-sm">
               <div class="font-bold text-lg">{item.formatted.hari}, {item.formatted.waktu}</div>
-              <div>{item.unitKerja.nama}</div>
+              <div>
+                <span
+                  class="mr-2"
+                >{item.unitKerja.nama}</span>
+                <span>Jadwal {item.type}</span>
+              </div>
             </div>
             <div class="px-4">
               {item._count.absen} pegawai
