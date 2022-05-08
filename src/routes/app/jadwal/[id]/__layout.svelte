@@ -46,7 +46,15 @@
 </script>
 
 <PageHeader>
-  <h1 class="text-2xl font-bold">{formatted_jadwal.formatted.hari}, {formatted_jadwal.formatted.waktu}</h1>
+
+  <div class="md:flex md:items-center md:justify-between">
+    <div class="mb-4 md:mb-0 md:flex md:items-center md:gap-x-4">
+      <h1 class="text-2xl font-bold">{formatted_jadwal.formatted.hari}</h1>
+      <h1 class="text-2xl font-bold">{formatted_jadwal.formatted.waktu}</h1>
+    </div>
+    <FButton primary>Publish Jadwal</FButton>
+  </div>
+
   <div class="flex flex-wrap gap-y-3 gap-x-1">
     {#each jadwal_infos as ji}
       <div class="whitespace-nowrap flex items-center bg-gray-100 text-gray-600 rounded text-sm">
