@@ -9,14 +9,13 @@ export async function client_fetch_json(options) {
   }
 
   if (options.payload) {
-    fetch_options.data = JSON.stringify(payload)
+    fetch_options.body = JSON.stringify(options.payload)
   }
 
   if (options.params) {
     options.path = options.path + '?' + new URLSearchParams({
       ...options.params
     })
-    console.log(options.path)
   }
 
   const response = await fetch(options.path, fetch_options)

@@ -1,59 +1,58 @@
 <script>
   import {getContext } from 'svelte'
+  import PageHeader from '$lib/page-header.svelte'
   import FButton from '$lib/fbutton.svelte'
+  import { date } from '$lib/format/jadwal'
 
   const cu = getContext('currentUser');
   const user = cu.getUser();
 
   export let items = [];
+  $: formatted_items = items.map(date);
 </script>
 
 <svelte:head>
   <title>Jadwal -- SIABS</title>
 </svelte:head>
 
-<section class='section border-b border-gray-200'>
-  <div class="container py-12 flex flex-col gap-y-4 px-4">
-    <h1 class="font-black text-3xl">Daftar Jadwal {items.length}</h1>
-    <div class="flex flex-wrap gap-x-4">
-      {#if user.superUser }
-      <FButton 
-        size="sm" 
-        path="/app/jadwal/create"
-        outline
-      >
-        tambah jadwal
-      </FButton>
-      {/if}
-    </div>
+<PageHeader>
+  <h1 class="font-black text-3xl">Daftar Jadwal {items.length}</h1>
+  <div class="flex flex-wrap gap-x-4">
+    {#if user.superUser }
+    <FButton 
+      size="sm" 
+      path="/app/jadwal/create"
+      outline
+    >
+      tambah jadwal
+    </FButton>
+    {/if}
   </div>
+</PageHeader>
 
+<section class="section">
   <div class="container py-6 px-4">
-    <table>
-      <thead>
-        <tr>
-          <th>Tanggal</th>
-          <th>Jam</th>
-          <th>Unit Kerja</th>
-          <th>Pegawai</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each items as item}
-          <tr>
-            <td>{item.hari}</td>
-            <td>{item.waktu}</td>
-            <td>{item.unitKerja.nama}</td>
-            <td>12</td>
-            <td>
-              <a href={`/app/jadwal/${item.id}/overview`}>detail</a>
-            </td>
-          </tr>
-        {/each}
-        <tr>
-          
-        </tr>
-      </tbody>
-    </table>
+    <ul class="flex flex-col">
+      {#each formatted_items as item}
+        <li>
+          <a href={`/app/jadwal/${item.id}/overview`} 
+            class="flex items-center border-b py-4 gap-x-4"
+          >
+            {#if (item.status == 'Draft')}
+              <div class="rounded-full h-4 w-4 bg-yellow-400"></div>
+            {:else if (item.status == 'Published')}
+              <div class="rounded-full h-4 w-4 bg-green-400"></div>
+            {/if}
+            <div class="flex-grow text-sm">
+              <div class="font-bold text-lg">{item.formatted.hari}, {item.formatted.waktu}</div>
+              <div>{item.unitKerja.nama}</div>
+            </div>
+            <div class="px-4">
+              {item._count.absen} pegawai
+            </div>
+          </a>
+        </li>
+      {/each}
+    </ul>
   </div>
 </section>

@@ -69,22 +69,21 @@
 </script>
 
 <div class="flex flex-col">
-  <nav class="bg-black text-white">
+  <nav class="bg-gray-900 text-white">
     <div class="container flex">
       <div class="px-4 md:px-none flex py-3" href="/app">
-        <div class="h-8 w-8 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500">
+        <div class="h-10 w-10 rounded-full bg-gradient-to-r from-indigo-400 to-pink-300 mr-2">
         </div>
-        <div class="w-0.5 h-8 bg-gray-600 mx-4"></div>
         <img 
           src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" 
           alt="logo" 
-          class="w-8 h8 mr-1 rounded-full"
+          class="w-10 h-10 rounded-full mr-2"
         />
         <div>
           <div class="font-black text-lg" style="line-height: 1;">{$session.user.username}</div>
 
           {#if $session.user.superUser}
-          <div class="text-sm text-gray-600">Super Admin</div>
+          <div class="text-sm">Super Admin</div>
           {:else}
           <div class="text-sm text-gray-600">Pegawai</div>
           {/if}
