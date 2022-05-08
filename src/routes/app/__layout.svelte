@@ -68,11 +68,11 @@
   $: menus = _menus($session, $page)
 </script>
 
-<div class="flex flex-col">
-  <nav class="bg-gray-900 text-white">
+<div class="flex flex-col" style="min-height: 100vh;">
+  <nav class="border-b-4 border-purple-900 bg-black text-white">
     <div class="container flex">
       <div class="px-4 md:px-none flex py-3" href="/app">
-        <div class="h-10 w-10 rounded-full bg-gradient-to-r from-indigo-400 to-pink-300 mr-2">
+        <div class="h-10 w-10 rounded-full bg-gradient-to-r from-indigo-800 to-pink-600 mr-2">
         </div>
         <img 
           src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" 
@@ -93,11 +93,11 @@
       <div class="flex-grow">
       </div>
 
-      <div class="hidden md:flex gap-x-6 text-gray-400 font-bold text-sm">
+      <div class="hidden md:flex gap-x-6 font-bold text-sm">
         <a
           target="_blank"
           href="/app"
-          class="gap-x-2 flex items-center px-4 py-2 hover:bg-gray-100 hover:text-gray-700"
+          class="gap-x-2 flex items-center px-4 py-2"
         >
           <ion-icon name="notifications-outline"></ion-icon>
           <span>
@@ -114,7 +114,7 @@
       <div class="md:hidden flex items-center">
         <ion-icon 
           on:click={toggleMobileMenu}
-          class="w-8 h-8 px-4 text-gray-500 hover:text-gray-100 active:text-white" 
+          class="w-8 h-8 px-4" 
           name="menu-outline"></ion-icon>
       </div>
     </div>
@@ -163,11 +163,11 @@
     </div>
   </nav>
 
-  <div class="flex-grow">
+  <div class="flex-grow pb-12">
     <slot></slot>
   </div>
 
-  <footer class="border-t border-gray-200 flex justify-center items-center h-12 bg-gray-100">
-    <div class="text-sm font-bold text-gray-400">Copyright Jordan Meta</div>
+  <footer class="border-t border-gray-200 flex justify-center items-center h-12 bg-gray-900">
+    <div class="text-sm font-bold text-gray-200">Copyright Jordan Meta</div>
   </footer>
 </div>
