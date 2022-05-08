@@ -16,9 +16,9 @@
 </script>
 
 <div class="container px-4 flex flex-col py-6">
-  <div class="w-full md:w-2/3">
+  <div class="w-full">
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-xl">Daftar Pegawai</h1>
+      <h1 class="text-xl font-bold text-gray-600">Daftar Pegawai</h1>
       <FButton
         path={`/app/absen/create?jadwal=${jadwal.id}`}
         primary
@@ -29,19 +29,29 @@
 
     <ul>
       {#each formatted as member}
-        <li class="flex items-center gap-x-3 border-b py-3">
+        <a 
+          class="flex items-center gap-x-3 border-b py-4"
+          href={`/app/absen/${member.id}/overview`}
+        >
           <img 
             src={`https://i.pravatar.cc/150?img=${member.pegawai.id}`}
-            class="rounded border w-10 h-10" 
+            class="rounded border w-12 h-12" 
           />
-          <div>
-            <div class="font-bold">{member.pegawai.nama}</div>
-            <div class="flex items-center gap-x-4">
-              <div class="bg-gray-200 rounded px-0.5 py-0.5 text-sm">Status: {member.display.workStatus}</div>
-              <div class="text-sm text-gray-800">{member.pegawai.nip}</div>
+          <div class="flex-grow">
+            <div class="md:flex md:gap-x-3">
+              <div class="font-bold">{member.pegawai.nama}</div>
+              <div class="font-bold">{member.pegawai.nip}</div>
             </div>
+            <div class="text-xs uppercase">Status: {member.display.workStatus}</div>
           </div>
-        </li>
+          {#if !member.waktu}
+            <div class="rounded-full h-4 w-4 bg-yellow-500"></div>
+            <div class="italic text-xs">Menunggu Login</div>
+          {:else}
+            <div class="rounded-full h-4 w-4 bg-green-500"></div>
+            <div class="italic text-xs">Telah Absen</div>
+          {/if}
+        </a>
       {/each}
     </ul>
   </div>

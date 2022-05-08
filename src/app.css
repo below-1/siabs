@@ -67,4 +67,8 @@
   .btn-lg {
     @apply text-lg;
   }
+
+  .link {
+    @apply text-purple-600 underline;
+  }
 }
