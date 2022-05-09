@@ -37,7 +37,7 @@
 
   const menus = [
     { label: 'overview', path: `/app/jadwal/${jadwal.id}/overview` },
-    { label: 'modify', path: `/app/jadwal/${jadwal.id}/jadwal` },
+    { label: 'edit', path: `/app/jadwal/${jadwal.id}/edit` },
     { label: 'member', path: `/app/jadwal/${jadwal.id}/member` },
     { label: 'hapus', path: `/app/jadwal/${jadwal.id}/hapus` }
   ]
