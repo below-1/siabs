@@ -18,6 +18,8 @@ export async function get(event) {
       pegawai: true
     }
   })
+  console.log('members')
+  console.log(absens)
   return {
     status: 200,
     body: {

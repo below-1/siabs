@@ -1,6 +1,7 @@
 <script>
   export let size = 'md';
   export let primary = false;
+  export let danger = false;
   export let outline = false;
   export let loading = false;
   export let disabled = false;
@@ -13,6 +14,7 @@
     on:click
     class="btn flex items-center justify-center"
     class:btn-primary={primary}
+    class:btn-danger={danger}
     class:btn-outline={outline}
     class:btn-lg={size == 'lg'}
     class:btn-sm={size == 'sm'}
@@ -26,6 +28,7 @@
     on:click
     class="btn flex items-center justify-center"
     class:btn-primary={primary}
+    class:btn-danger={danger}
     class:btn-outline={outline}
     class:btn-lg={size == 'lg'}
     class:btn-sm={size == 'sm'}
