@@ -1,6 +1,7 @@
 <script>
   import { getContext } from 'svelte'
   import FButton from '$lib/fbutton.svelte'
+  import FInput from '$lib/finput.svelte'
   import { status } from '$lib/format/absen'
 
   const jadwal = getContext('jadwal');
@@ -17,8 +18,13 @@
 
 <div class="container px-4 flex flex-col py-6">
   <div class="w-full">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-xl font-bold text-gray-600">Daftar Pegawai</h1>
+    <div class="flex items-center mb-6 gap-x-2">
+      <h1 class="flex-grow text-xl font-bold text-gray-600">Daftar Pegawai</h1>
+
+      <input 
+        class="rounded px-2 py-1 font-semibold text-gray-700 border-2 disabled:bg-gray-100 disabled:opacity-75"
+        placeholder="keyword.." 
+      />
       <FButton
         path={`/app/absen/create?jadwal=${jadwal.id}`}
         primary

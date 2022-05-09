@@ -44,7 +44,7 @@
               <div class="rounded-full h-4 w-4 bg-green-400"></div>
             {/if}
             <div class="flex-grow text-sm">
-              <div class="font-bold text-lg">{item.formatted.hari}, {item.formatted.waktu}</div>
+              <div class="font-bold text-lg">{item.display.hari}, {item.display.waktu}</div>
               <div>
                 <span
                   class="mr-2"

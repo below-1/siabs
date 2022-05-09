@@ -21,10 +21,8 @@
   import { setContext } from 'svelte'
 
   import dayjs from '$lib/day'
-
   import PageHeader from '$lib/page-header.svelte'
   import FButton from '$lib/fbutton.svelte'
-
   import { date } from '$lib/format/jadwal'
 
   export let jadwal;
@@ -49,8 +47,8 @@
 
   <div class="md:flex md:items-center md:justify-between">
     <div class="mb-4 md:mb-0 md:flex md:items-center md:gap-x-4">
-      <h1 class="text-2xl font-bold">{formatted_jadwal.formatted.hari}</h1>
-      <h1 class="text-2xl font-bold">{formatted_jadwal.formatted.waktu}</h1>
+      <h1 class="text-2xl font-bold">{formatted_jadwal.display.hari}</h1>
+      <h1 class="text-2xl font-bold">{formatted_jadwal.display.waktu}</h1>
     </div>
     <FButton primary>Publish Jadwal</FButton>
   </div>
