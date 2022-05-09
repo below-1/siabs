@@ -4,6 +4,7 @@
   import Field from '$lib/field.svelte'
   import Finput from '$lib/finput.svelte'
   import FButton from '$lib/fbutton.svelte'
+  import PageHeader from '$lib/page-header.svelte'
   import { required, min_length, max_length, useValidation } from '$lib/validation'
 
   const cu = getContext('currentUser')
@@ -48,10 +49,8 @@
 
 <input bind:this={fileInput} type="file" hidden />
 
-<section class='section border-b border-gray-200'>
-
-  <div class="container flex flex-wrap gap-y-6 px-4 py-4 md:px-none md:gap-x-8">
-
+<PageHeader>
+  <div class="flex">
     <div class="w-full md:w-1/6 flex flex-col justify-center items-center md:justify-start gap-y-2">
       <img
         src={item.avatar}
@@ -79,11 +78,8 @@
       <div class="flex flex-wrap gap-x-4">
       </div>
     </div>
-
-
-
   </div>
-</section>
+</PageHeader>
 
 <section class="pb-12">
   <div class="container py-12 px-4 flex">
