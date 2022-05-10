@@ -61,7 +61,7 @@
       >
         <img
           class="w-12 h-12 rounded"
-          src={`https://i.pravatar.cc/150?img=${item.id}`}
+          src={item.avatar}
         />
         <div>
           <div class="text-lg font-bold">{item.nama}</div>
