@@ -1,13 +1,33 @@
 <script>
   import {getContext } from 'svelte'
+  import { browser } from '$app/env'
+
   import PageHeader from '$lib/page-header.svelte'
   import FButton from '$lib/fbutton.svelte'
   import FInput from '$lib/finput.svelte'
+  import { client_fetch_json } from '$lib/http'
 
   const cu = getContext('currentUser');
   const user = cu.getUser();
 
+  let keyword = '';
   export let items = [];
+
+  async function searcItems(keyword) {
+    if (!browser) {
+      return;
+    }
+    const response = await client_fetch_json({
+      method: 'GET',
+      path: '/app/pegawai',
+      params: {
+        keyword
+      }
+    })
+    items = response.items;
+  }
+
+  $: searcItems(keyword);
 </script>
 
 <PageHeader>
@@ -31,6 +51,7 @@
       <FInput
         name="keyword"
         placeholder="Keyword..."
+        bind:value={keyword}
       />
     </div>
     {#each items as item}
