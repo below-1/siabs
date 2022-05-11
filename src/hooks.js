@@ -5,6 +5,7 @@ import { db } from './db';
 export const handle = async ({ event, resolve }) => {
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
 	event.locals.userid = cookies.userid || uuid();
+
 	if (event.url.pathname.startsWith('/app')) {
 		if (cookies && cookies.token) {
 			const authSession = await db.login.findFirst({
@@ -24,27 +25,23 @@ export const handle = async ({ event, resolve }) => {
 			})
 			if (authSession) {
 				event.locals.authSession = authSession
-			}
-		}
-	}
-
-	if (cookies) {
-		let curr_sess = {}
-		if (cookies.token) {
-			const login = await db.login.findFirst({
-				where: {
-					token: cookies.token
-				},
-				include: {
-					user: true
+			} else {
+				return {
+					status: 303,
+					headers: {
+						location: '/auth/signin',
+					}
 				}
-			})
-			if (login) {
-				event.locals.authSession = login
+			}
+		} else {
+			return {
+				status: 303,
+				headers: {
+					location: '/auth/signin',
+				}
 			}
 		}
 	}
-
 	
 	const response = await resolve(event);
 	if (!cookies.userid) {

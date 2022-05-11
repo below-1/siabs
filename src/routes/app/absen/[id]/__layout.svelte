@@ -40,7 +40,7 @@
 </script>
 
 <PageHeader>
-  <div class="flex items-center justify-between">
+  <div class="flex flex-col md:flex-row items-center justify-between">
     <h1 class="text-2xl font-bold flex-grow">Detail Absensi #{absen.id}</h1>
     <FButton 
       danger

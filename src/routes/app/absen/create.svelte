@@ -37,7 +37,7 @@
     ],
   }, payload);
 
-  $: formatted = date(jadwal).formatted;
+  $: formatted = date(jadwal).display;
   $: ftstamp = `${formatted.hari} ${formatted.waktu}`;
 
   async function searchPegawai(keyword) {
@@ -63,7 +63,7 @@
       payload,
       path: ''
     })
-    console.log(resp_data)
+    window.location = `/app/jadwal/${jadwal.id}/overview`
   }
 </script>
 

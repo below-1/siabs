@@ -4,6 +4,9 @@ export async function get(event) {
   const pegawai = await db.pegawai.findFirst({
     where: {
       id: parseInt(event.params.id)
+    },
+    include: {
+      user: true
     }
   })
   console.log('pegawai')

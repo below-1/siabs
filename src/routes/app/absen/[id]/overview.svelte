@@ -5,13 +5,13 @@
 </script>
 
 <div class="flex flex-col gap-y-4">
-  <div class="border-b-2 py-4 flex items-center">
+  <div class="hidden md:flex border-b-2 py-4 items-center">
     <div class="w-1/3 font-bold text-2xl">Pegawai</div>
     <div class="w-1/3 font-bold text-2xl">Jadwal</div>
     <div class="w-1/3 font-bold text-2xl">Absen</div>
   </div>
 
-  <div class="flex flex-wrap gap-y-8">
+  <div class="flex flex-wrap gap-y-8 py-4">
 
     <div class="w-full md:w-1/3 flex flex-col gap-y-4">
       <div class="flex items-center gap-x-4">

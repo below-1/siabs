@@ -15,18 +15,21 @@
   <title>Jadwal -- SIABS</title>
 </svelte:head>
 
+
 <PageHeader>
-  <h1 class="font-black text-3xl">Daftar Jadwal {items.length}</h1>
-  <div class="flex flex-wrap gap-x-4">
-    {#if user.superUser }
-    <FButton 
-      size="sm" 
-      path="/app/jadwal/create"
-      outline
-    >
-      tambah jadwal
-    </FButton>
-    {/if}
+  <div class="flex flex-col md:flex-row justify-between items-center gap-y-2">
+    <h1 class="font-black text-3xl">Daftar Jadwal</h1>
+    <div class="flex flex-wrap gap-x-4">
+      {#if user.superUser }
+      <FButton 
+        size="lg" 
+        path="/app/jadwal/create"
+        primary
+      >
+        tambah jadwal
+      </FButton>
+      {/if}
+    </div>
   </div>
 </PageHeader>
 
@@ -45,14 +48,12 @@
             {/if}
             <div class="flex-grow text-sm">
               <div class="font-bold text-lg">{item.display.hari}, {item.display.waktu}</div>
-              <div>
-                <span
-                  class="mr-2"
-                >{item.unitKerja.nama}</span>
-                <span>Jadwal {item.type}</span>
+              <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-bold whitespace-nowrap text-gray-700">
+                <span class="bg-gray-100 p-0.5 rounded">{item.unitKerja.nama}</span>
+                <span class="bg-gray-100 p-0.5 rounded">Jadwal {item.type}</span>
               </div>
             </div>
-            <div class="px-4">
+            <div class="px-4 hidden md:block">
               {item._count.absen} pegawai
             </div>
           </a>

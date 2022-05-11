@@ -18,13 +18,16 @@
 </script>
 
 <script>
-  import { setContext } from 'svelte'
+  import { setContext, getContext, onMount } from 'svelte'
   import PageHeader from '$lib/page-header.svelte'
   import FButton from '$lib/fbutton.svelte'
   import ModalConfirmation from '$lib/modal-confirmation.svelte'
 
   export let pegawai;
   setContext('pegawai', pegawai)
+
+  const { getUser } = getContext('currentUser');
+  const currentUser = getUser();
 
   const menus = [
     { label: 'overview', path: `/app/pegawai/${pegawai.id}/overview`, icon: '<ion-icon name="apps-outline"></ion-icon>' },
@@ -52,6 +55,7 @@
     <div class="col-span-12 md:col-span-6 flex flex-col items-center md:items-start justify-center text-gray-500 mb-4">
       <img class="h-32 md:hidden rounded-full" src="https://i.pravatar.cc/150?img=${pegawai.id}" />
       <div class="font-black text-lg md:text-xl text-black">{pegawai.nama}</div>
+      <div class="font-black text-lg text-black">{pegawai.user.username}</div>
       <div class="text-sm font-semibold">NIP: {pegawai.nip}, NIK: {pegawai.nik}</div>
       <div class="text-sm flex flex-wrap gap-x-4">
       </div>
