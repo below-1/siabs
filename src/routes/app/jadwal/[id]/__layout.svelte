@@ -24,6 +24,7 @@
   import PageHeader from '$lib/page-header.svelte'
   import FButton from '$lib/fbutton.svelte'
   import { date } from '$lib/format/jadwal'
+  import { client_fetch_json } from '$lib/http'
 
   export let jadwal;
   const formatted_jadwal = date(jadwal);
@@ -50,7 +51,11 @@
       <h1 class="text-2xl font-bold">{formatted_jadwal.display.hari}</h1>
       <h1 class="text-2xl font-bold">{formatted_jadwal.display.waktu}</h1>
     </div>
-    <FButton primary>Publish Jadwal</FButton>
+    {#if jadwal.status == 'Draft'}
+    <FButton path={`/app/jadwal/${jadwal.id}/publish`} primary>Publis Jadwal</FButton>
+    {:else}
+    <div class="bg-green-500 text-white text-lg font-bold rounded px-8 py-1">Telah Dipublikasi</div>
+    {/if}
   </div>
 
   <div class="flex flex-wrap gap-y-3 gap-x-1">

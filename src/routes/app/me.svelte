@@ -13,6 +13,7 @@
     if (!browser || currentUser.superUser) {
       return
     }
+    console.log('start')
     navigator.geolocation.getCurrentPosition(async (pos) => {
       const latitude = pos.coords.latitude
       const longitude = pos.coords.longitude
@@ -36,12 +37,18 @@
           checkOutResult = 'none'
         }
       } catch (err) {
+        console.log(err)
         netStatus = 'error'
       } finally {
         setTimeout(() => {
           window.location = `/app/pegawai/${currentUser.pegawai.id}/overview`
         }, 3000)
+        console.log('here')
       }
+    }, (err) => {
+      checkOutResult = 'error'
+      console.log('error')
+      console.log(err)
     })
   })
 </script>
