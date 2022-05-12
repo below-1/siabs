@@ -9,8 +9,6 @@ export async function get(event) {
       user: true
     }
   })
-  console.log('pegawai')
-  console.log(pegawai)
   return {
     status: 200,
     body: {
